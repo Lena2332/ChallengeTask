@@ -1,0 +1,8 @@
+{
+  "autoload": {
+    "psr-4": {"Project\\": "Project/"}
+  },
+  "require": {
+    "php-di/php-di": "^6.4"
+  }
+}
