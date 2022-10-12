@@ -18,8 +18,15 @@ class StoreController extends Controller implements ControllerInterface
         $this->repository = $repository;
     }
 
+    /**
+     * @param int|null $id
+     * @return void
+     * Show add store page
+     */
     public function add(?int $id): void
     {
+        ob_start();
+
         $title = 'Store add';
 
         $companyList = $this->repository->getCompanies();
@@ -30,18 +37,30 @@ class StoreController extends Controller implements ControllerInterface
         $blockTemplate = '_store_form';
 
         require_once self::TEMPL;
+
+        $output = ob_get_contents();
+        ob_end_clean();
+
+        $this->render($output);
     }
 
+    /**
+     * @param int $id
+     * @return void
+     * Show edit store page
+     */
     public function edit(int $id): void
     {
-        $title = 'Store edit';
-
         $storeData = $this->repository->getById($id);
 
         if (!$storeData) {
             header('Location: ' . '/404');
             exit();
         }
+
+        ob_start();
+
+        $title = 'Store edit';
 
         $companyId = $storeData->getCompanyId();
 
@@ -50,10 +69,21 @@ class StoreController extends Controller implements ControllerInterface
         $blockTemplate = '_store_form';
 
         require_once self::TEMPL;
+
+        $output = ob_get_contents();
+        ob_end_clean();
+
+        $this->render($output);
     }
 
+    /**
+     * @return void
+     * Show list of all stores
+     */
     public function getAll(): void
     {
+        ob_start();
+
         $title = 'Store list';
 
         $list = $this->repository->getAll();
@@ -61,10 +91,21 @@ class StoreController extends Controller implements ControllerInterface
         $blockTemplate = '_store_list';
 
         require_once self::TEMPL;
+
+        $output = ob_get_contents();
+        ob_end_clean();
+
+        $this->render($output);
     }
 
+    /**
+     * @return void
+     * Show list of special store
+     */
     public function storeListByCompany(int $id): void
     {
+        ob_start();
+
         $title = 'Store list';
 
         $companyList = $this->repository->getCompanies();
@@ -77,6 +118,11 @@ class StoreController extends Controller implements ControllerInterface
         $blockTemplate = '_store_list';
 
         require_once self::TEMPL;
+
+        $output = ob_get_contents();
+        ob_end_clean();
+
+        $this->render($output);
     }
 
 

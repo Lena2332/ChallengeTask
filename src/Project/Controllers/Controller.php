@@ -10,14 +10,14 @@ abstract class Controller
 {
     protected RepositoryIntrface $repository;
 
-    public function render(string $template, array $data)
+    protected function render(string $output)
     {
-        ob_start();
+        unset($_SESSION['success']);
+        unset($_SESSION['warning']);
 
-        require_once $template;
+        header('Content-Type: text/html; charset=utf-8');
 
-        return (string) ob_get_clean();
-
-
+        echo $output;
     }
+
 }

@@ -17,19 +17,34 @@ class CompanyController extends Controller implements ControllerInterface
         $this->repository = $repository;
     }
 
+    /**
+     * @param int|null $id
+     * @return void
+     * Show add company page
+     */
     public function add(?int $id): void
     {
+        ob_start();
+
         $title = 'Company add';
 
         $blockTemplate = '_company_form';
 
         require_once self::TEMPL;
+
+        $output = ob_get_contents();
+        ob_end_clean();
+
+        $this->render($output);
     }
 
+    /**
+     * @param int $id
+     * @return void
+     * Show company edit page
+     */
     public function edit(int $id): void
     {
-        $title = 'Company edit';
-
         $companyData = $this->repository->getById($id);
 
         if (!$companyData) {
@@ -37,13 +52,28 @@ class CompanyController extends Controller implements ControllerInterface
             exit();
         }
 
+        ob_start();
+
+        $title = 'Company edit';
+
         $blockTemplate = '_company_form';
 
         require_once self::TEMPL;
+
+        $output = ob_get_contents();
+        ob_end_clean();
+
+        $this->render($output);
     }
 
+    /**
+     * @return void
+     * Show list of companies
+     */
     public function getAll(): void
     {
+        ob_start();
+
         $title = 'Company list';
 
         $list = $this->repository->getAll();
@@ -51,6 +81,11 @@ class CompanyController extends Controller implements ControllerInterface
         $blockTemplate = '_company_list';
 
         require_once self::TEMPL;
+
+        $output = ob_get_contents();
+        ob_end_clean();
+
+        $this->render($output);
     }
 
     public function store(array $data): void
