@@ -17,8 +17,10 @@
         </div>
     <?php   } ?>
 
+    <?php /** @var string $title */ ?>
+    <?php /** @var string $blockTemplate */ ?>
     <div class="container mt-5">
-        <h1 class="text-center"><i class="fa-solid fa-briefcase"></i> <?php echo $data['title']; ?></h1>
+        <h1 class="text-center"><i class="fa-solid fa-briefcase"></i> <?php echo $title; ?></h1>
         <div class="row mt-5">
 
             <?php include_once  __DIR__.'/blocks/'.$blockTemplate.'.php'; ?>

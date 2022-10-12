@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Project\Controllers;
 
-use Project\Models\ModelInterface;
 use Project\Repositories\RepositoryIntrface;
 
 class CompanyController extends Controller implements ControllerInterface
@@ -13,14 +12,12 @@ class CompanyController extends Controller implements ControllerInterface
     const TEXT_ADD_SUCCESS = 'Company data was successfully added';
     const TEXT_CHANGE_SUCCESS = 'Company data was successfully changed';
 
-    protected ModelInterface $model;
-
     public function __construct(RepositoryIntrface $repository)
     {
         $this->repository = $repository;
     }
 
-    public function add(): void
+    public function add(?int $id): void
     {
         $title = 'Company add';
 
@@ -74,7 +71,7 @@ class CompanyController extends Controller implements ControllerInterface
 
             $_SESSION['success'] = self::TEXT_ADD_SUCCESS;
 
-            header('Location: ' . '/company/' . $insertId);
+            header('Location: ' . '/company/');
         }
     }
 
@@ -123,6 +120,10 @@ class CompanyController extends Controller implements ControllerInterface
 
         if ( strlen($array['name']) > 255 ) {
             $_SESSION['errors']['name'] = 'Too long string, max string length is 255 characters';
+        }
+
+        if ( !is_string($array['name']) ) {
+            $_SESSION['errors']['name'] = 'Field name must be type of string';
         }
 
         if ( $array['organization_number'] === '' ) {

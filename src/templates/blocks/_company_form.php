@@ -38,6 +38,7 @@
                 <?php } elseif ( isset($companyData)) { ?>
                     value="<?php echo $companyData->getOrganizationNumber(); ?>"
                 <?php } ?>
+                required
             >
 
             <?php if ( isset($_SESSION['errors']['organization_number']) ) {  ?>

@@ -1,4 +1,4 @@
 /.idea
-/src/vendor
+/src/vendor/*
 /database/mysql/*
 !/database/mysql/.gitkeep

@@ -89,7 +89,7 @@ class Route
 
         switch ($this->method) {
             case 'post':
-                if ($this->hasId()) {
+                if ( $this->hasId() ) {
                     $method = 'update';
                 }
                 else {
@@ -97,7 +97,7 @@ class Route
                 }
                 break;
             case 'get':
-                if ($this->hasId()) {
+                if ( $this->hasId() ) {
                     $method = 'edit';
                 } elseif (
                     isset($this->pathArr[1]) &&
@@ -112,7 +112,7 @@ class Route
                 $method = 'delete';
                 break;
             default:
-                return $method = '';
+                $method = '';
         }
 
         return $method;
@@ -124,7 +124,7 @@ class Route
      */
     private function hasId(): bool
     {
-        if (isset($this->pathArr[1])
+        if ( isset($this->pathArr[1] )
             && is_numeric($this->pathArr[1])
         ) {
             return true;
@@ -141,12 +141,23 @@ class Route
     {
         $paramsArr = [];
 
-        if ($this->hasId()) {
+        if ( $this->hasId() ) {
             $paramsArr[] = (int) $this->pathArr[1];
         }
 
-        if ($this->method === 'post') {
+        if ( $this->method === 'post' ) {
             $paramsArr[] = $_POST;
+        }
+
+        /*
+         * $this->pathArr[2] is company_id
+         * for routes added new store
+         * or show store list of companies
+         */
+        if ( isset($this->pathArr[2]) ) {
+            $paramsArr[] = (int) $this->pathArr[2];
+        } else {
+            $paramsArr[] = null;
         }
 
         return $paramsArr;

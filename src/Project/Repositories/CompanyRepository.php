@@ -36,6 +36,38 @@ class CompanyRepository extends Repository implements RepositoryIntrface
     }
 
     /**
+     * @return array Models/Company[]
+     */
+    public function getAll(): array
+    {
+        $query = $this->connection->query('SELECT * FROM ' . $this->table);
+
+        $outputArray = [];
+
+        while ($data = $query->fetch(\PDO::FETCH_ASSOC)) {
+            $outputArray[] =  $this->applyMapper($data);
+        }
+
+        return $outputArray;
+    }
+
+    /**
+     * @param int $id
+     * @return Entity|null
+     */
+    public function getById(int $id): ?Entity
+    {
+        $query = $this->connection->query('SELECT * FROM ' . $this->table. ' WHERE id = '. $id);
+        $data = $query->fetch(\PDO::FETCH_ASSOC);
+
+        if (!$data) {
+            return null;
+        }
+
+        return $this->applyMapper($data);
+    }
+
+    /**
      * @param array $data
      * @return int
      */

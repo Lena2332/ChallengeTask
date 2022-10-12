@@ -4,7 +4,7 @@ namespace Project\Controllers;
 
 interface ControllerInterface
 {
-    public function add(): void;
+    public function add(? int $id): void;
 
     public function edit(int $id): void;
 
