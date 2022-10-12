@@ -63,7 +63,7 @@ class StoreController extends Controller implements ControllerInterface
         require_once self::TEMPL;
     }
 
-    public function getAllByCompany(int $id): void
+    public function storeListByCompany(int $id): void
     {
         $title = 'Store list';
 

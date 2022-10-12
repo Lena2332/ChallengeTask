@@ -39,6 +39,7 @@ class StoreRepository extends Repository implements RepositoryIntrface
         $this->entity->setZip($data['zip']);
         $this->entity->setCountry($data['country']);
         $this->entity->setLongitude($data['longitude']);
+        $this->entity->setLatitude($data['latitude']);
         $this->entity->setCompanyName($data['company_name']);
 
         return $this->entity;
@@ -122,7 +123,8 @@ class StoreRepository extends Repository implements RepositoryIntrface
                     city,
                     zip,
                     country,
-                    longitude)
+                    longitude,
+                    latitude)
                 VALUES
                   (:name,
                    :company_id,
@@ -130,7 +132,8 @@ class StoreRepository extends Repository implements RepositoryIntrface
                    :city,
                    :zip,
                    :country,
-                   :longitude)";
+                   :longitude,
+                   :latitude)";
 
         $stmt = $this->connection->prepare($sql);
         $stmt->execute($data);
@@ -151,7 +154,8 @@ class StoreRepository extends Repository implements RepositoryIntrface
                     city=:city,
                     zip=:zip,
                     country=:country,
-                    longitude=:longitude   
+                    longitude=:longitude,
+                    latitude=:latitude
                  WHERE id=:id";
 
         $stmt = $this->connection->prepare($sql);

@@ -15,6 +15,7 @@ class Store implements Entity
     private string $country;
     private string $city;
     private string $longitude;
+    private string $latitude;
 
     /**
      * @return int
@@ -158,5 +159,21 @@ class Store implements Entity
     public function setLongitude(string $longitude): void
     {
         $this->longitude = $longitude;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLatitude(): string
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * @param string $latitude
+     */
+    public function setLatitude(string $latitude): void
+    {
+        $this->latitude = $latitude;
     }
 }

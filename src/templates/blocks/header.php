@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <?php /** @var string $title */ ?>
     <title><?php echo $title; ?></title>
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
@@ -14,6 +15,7 @@
           crossorigin="anonymous"
           referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/public/css/style.css">
+
     <!-- JavaScript Bundle with Popper -->
     <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"

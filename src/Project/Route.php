@@ -97,7 +97,9 @@ class Route
                 }
                 break;
             case 'get':
-                if ( $this->hasId() ) {
+                if ( $this->hasId()
+                    && !isset($this->pathArr[2])
+                ) {
                     $method = 'edit';
                 } elseif (
                     isset($this->pathArr[1]) &&
