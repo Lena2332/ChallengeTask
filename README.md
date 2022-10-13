@@ -13,4 +13,4 @@ Site link - http://localhost
 
 PHP MyAdmin - http://localhost:8085
 
-You sholud upload dump /src/challenge.sql
+You should upload dump /src/challenge.sql

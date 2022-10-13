@@ -89,26 +89,10 @@ class Route
 
         switch ($this->method) {
             case 'post':
-                if ( $this->hasId() ) {
-                    $method = 'update';
-                }
-                else {
-                    $method = 'store';
-                }
+                $method = $this->getPostMethod();
                 break;
             case 'get':
-                if ( $this->hasId()
-                    && !isset($this->pathArr[2])
-                ) {
-                    $method = 'edit';
-                } elseif (
-                    isset($this->pathArr[1]) &&
-                    $this->pathArr[1] == 'add'
-                ) {
-                    $method = 'add';
-                } else {
-                    $method = 'getAll';
-                }
+                $method = $this->getViewMethod();
                 break;
             case 'delete':
                 $method = 'delete';
@@ -163,5 +147,39 @@ class Route
         }
 
         return $paramsArr;
+    }
+
+    /**
+     * @return string
+     * Get the controller's method for all POST queries
+     */
+    private function getPostMethod(): string
+    {
+        if ( $this->hasId() ) {
+            return 'update';
+        }
+        else {
+            return 'store';
+        }
+    }
+
+    /**
+     * @return string
+     * Get the controller's method for all GET queries
+     */
+    private function getViewMethod(): string
+    {
+        if ( $this->hasId()
+            && !isset($this->pathArr[2])
+        ) {
+            return 'edit';
+        } elseif (
+            isset($this->pathArr[1]) &&
+            $this->pathArr[1] == 'add'
+        ) {
+            return 'add';
+        } else {
+            return 'getAll';
+        }
     }
 }
